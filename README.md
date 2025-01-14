@@ -35,3 +35,51 @@ How JWT(JSON Web Token) works:
 
 No need to store session state on the server, making the system stateless and scalable.
 Passwords prove who you are (authentication), but JWTs can also handle what you can do (authorization).
+
+
+
+Service Layer & User Management:
+
+User registration and login
+JWT authentication
+Password encryption
+Basic user CRUD operations
+
+
+Account Management:
+
+Account creation
+Account listing and details
+Account status management
+Balance updates
+
+
+Transaction Management:
+
+Deposit functionality
+Withdrawal functionality
+Transfer between accounts
+Transaction history
+
+
+Admin Features:
+
+Admin dashboard
+User management for admins
+System reports
+Account oversight
+
+
+Frontend Development:
+
+React components for user interface
+Authentication flows
+Account management interface
+Transaction interface
+
+
+Testing:
+
+Unit tests
+Integration tests
+Security tests
