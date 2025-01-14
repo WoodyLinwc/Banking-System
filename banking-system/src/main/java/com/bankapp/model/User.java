@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(name = "is_enabled", nullable = false)
     private boolean enabled = false;
 
     @ElementCollection(fetch = FetchType.EAGER)
