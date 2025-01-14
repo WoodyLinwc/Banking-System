@@ -1,11 +1,9 @@
 package com.bankapp.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -36,8 +34,91 @@ public class Transaction {
     @Column(nullable = false)
     private LocalDateTime timestamp;
 
+    // Default constructor
+    public Transaction() {
+    }
+
+    // All args constructor
+    public Transaction(Long id, String referenceNumber, Account account, TransactionType type,
+                      BigDecimal amount, String description, Account destinationAccount,
+                      LocalDateTime timestamp) {
+        this.id = id;
+        this.referenceNumber = referenceNumber;
+        this.account = account;
+        this.type = type;
+        this.amount = amount;
+        this.description = description;
+        this.destinationAccount = destinationAccount;
+        this.timestamp = timestamp;
+    }
+
     @PrePersist
     protected void onCreate() {
         timestamp = LocalDateTime.now();
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReferenceNumber() {
+        return referenceNumber;
+    }
+
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Account getDestinationAccount() {
+        return destinationAccount;
+    }
+
+    public void setDestinationAccount(Account destinationAccount) {
+        this.destinationAccount = destinationAccount;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }
