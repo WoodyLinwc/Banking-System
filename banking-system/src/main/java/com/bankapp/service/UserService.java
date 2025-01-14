@@ -45,15 +45,17 @@ public class UserService {
     }
 
     public UserResponseDto getUserById(Long id) {
-        return userRepository.findById(id)
-                .map(this::convertToDto)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+        return convertToDto(user);
     }
 
     public UserResponseDto getUserByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .map(this::convertToDto)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        System.out.println("Looking for user with email: " + email); // Debug log
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with email: " + email));
+        System.out.println("Found user: " + user.getFirstName()); // Debug log
+        return convertToDto(user);
     }
 
     public List<UserResponseDto> getAllUsers() {
@@ -65,7 +67,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new EntityNotFoundException("User not found");
+            throw new EntityNotFoundException("User not found with id: " + id);
         }
         userRepository.deleteById(id);
     }
