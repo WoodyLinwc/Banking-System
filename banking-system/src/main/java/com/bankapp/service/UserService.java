@@ -1,11 +1,11 @@
 package com.bankapp.service;
 
-import com.bankapp.dto.UserRegistrationDto;
-import com.bankapp.dto.UserResponseDto;
+import com.bankapp.dto.*;
 import com.bankapp.model.User;
 import com.bankapp.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,10 +51,8 @@ public class UserService {
     }
 
     public UserResponseDto getUserByEmail(String email) {
-        System.out.println("Looking for user with email: " + email); // Debug log
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with email: " + email));
-        System.out.println("Found user: " + user.getFirstName()); // Debug log
         return convertToDto(user);
     }
 
@@ -65,11 +63,57 @@ public class UserService {
     }
 
     @Transactional
+    public UserResponseDto updateUser(String email, UserUpdateDto updateDto) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Check if new email is already taken
+        if (!updateDto.getEmail().equals(email) && 
+            userRepository.existsByEmail(updateDto.getEmail())) {
+            throw new IllegalArgumentException("Email already taken");
+        }
+
+        user.setFirstName(updateDto.getFirstName());
+        user.setLastName(updateDto.getLastName());
+        user.setEmail(updateDto.getEmail());
+
+        User updatedUser = userRepository.save(user);
+        return convertToDto(updatedUser);
+    }
+
+    @Transactional
+    public void changePassword(String email, PasswordChangeDto passwordChangeDto) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Verify current password
+        if (!passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Current password is incorrect");
+        }
+
+        // Check if new password matches confirmation
+        if (!passwordChangeDto.getNewPassword().equals(passwordChangeDto.getConfirmPassword())) {
+            throw new IllegalArgumentException("New password and confirmation do not match");
+        }
+
+        // Update password
+        user.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
+        userRepository.save(user);
+    }
+
+    @Transactional
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new EntityNotFoundException("User not found with id: " + id);
+            throw new EntityNotFoundException("User not found");
         }
         userRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        userRepository.delete(user);
     }
 
     private UserResponseDto convertToDto(User user) {
