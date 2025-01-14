@@ -31,4 +31,7 @@ How JWT(JSON Web Token) works:
 2. Client-Side Storage:
 • The client stores the token (e.g., in localStorage or cookies).
 3. Subsequent Requests:
-• The client includes the token in the Authorization header of HTTP requests:
+• The client includes the token in the Authorization header of HTTP requests
+
+No need to store session state on the server, making the system stateless and scalable.
+Passwords prove who you are (authentication), but JWTs can also handle what you can do (authorization).
