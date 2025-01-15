@@ -1,104 +1,251 @@
-# Banking-System
+# Banking System Backend
 
+A robust banking system built with Spring Boot that provides secure account management, transactions, and administrative features.
 
-mkdir -p banking-system/src/main/java/com/bankapp/{config,controller,model,dto,repository,service,security,exception,util}
+## Technologies Used
 
+### Core Dependencies
+- **Spring Boot** (3.2.2)
+  - Spring Boot Starter Web
+  - Spring Boot Starter Data JPA
+  - Spring Boot Starter Security
+  - Spring Boot Starter Validation
+  - Spring Boot Starter Mail
+  - Spring Boot Starter Thymeleaf
+- **Database**
+  - PostgreSQL
+  - Spring Data JPA
+- **Security**
+  - Spring Security
+  - JWT (JSON Web Token) 0.12.3
+- **Documentation**
+  - SpringDoc OpenAPI (Swagger) 2.3.0
+- **Testing**
+  - JUnit 5
+  - Mockito
+  - H2 Database (for testing)
+- **Other**
+  - Jakarta Validation
+  - Java 17
+  - Maven
 
+## Project Structure
+```
+src/
+├── main/
+│   ├── java/
+│   │   └── com/
+│   │       └── bankapp/
+│   │           ├── config/          # Configuration classes
+│   │           ├── controller/      # REST endpoints
+│   │           ├── dto/            # Data Transfer Objects
+│   │           ├── model/          # Entity classes
+│   │           ├── repository/     # Data access layer
+│   │           ├── security/       # Security configuration
+│   │           ├── service/        # Business logic
+│   │           └── util/           # Utility classes
+│   └── resources/
+│       ├── application.properties  # Application configuration
+│       └── templates/             # Email templates
+└── test/
+    └── java/
+        └── com/
+            └── bankapp/
+                └── service/        # Service tests
+```
 
-psql -U postgres
+## Features
+
+### User Management
+- User registration and login
+- JWT-based authentication
+- Role-based authorization (USER, ADMIN)
+- Profile management
+
+### Account Management
+- Create different types of accounts (Savings, Checking)
+- View account details and balance
+- Account status management
+
+### Transaction Management
+- Deposit funds
+- Withdraw funds
+- Transfer between accounts
+- Transaction history
+- Email notifications for transactions
+
+### Admin Features
+- User management
+- Account oversight
+- System statistics
+- Transaction monitoring
+
+## Setup and Installation
+
+### Prerequisites
+- Java 17 or higher
+- Maven 3.6 or higher
+- PostgreSQL 12 or higher
+
+### Database Setup
+```sql
 CREATE DATABASE bankapp;
-- list of database
-\l
-- connect to database
-\c bankapp
-- list of tables
-\dt
-- display mode
-\x
+```
 
+### Configuration
+Update `src/main/resources/application.properties`:
+```properties
+# Database Configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/bankapp
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 
+# JWT Configuration
+jwt.secret=your_jwt_secret_key
+jwt.expiration=86400000
 
+# Email Configuration (if using email features)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your_email@gmail.com
+spring.mail.password=your_app_specific_password
+```
 
-DAO
-DTO
+### Building and Running
+```bash
+# Build the project
+mvn clean install
 
-JWT vs Password
-JWTs are widely used in modern authentication protocols like OAuth 2.0 and OpenID Connect.
-How JWT(JSON Web Token) works:
-1. Authentication:
-• A user logs in and provides valid credentials.
-• The server verifies the credentials, generates a JWT, and sends it to the user.
-2. Client-Side Storage:
-• The client stores the token (e.g., in localStorage or cookies).
-3. Subsequent Requests:
-• The client includes the token in the Authorization header of HTTP requests
+# Run the application
+mvn spring-boot:run
+```
 
-No need to store session state on the server, making the system stateless and scalable.
-Passwords prove who you are (authentication), but JWTs can also handle what you can do (authorization).
+## API Documentation
 
-OpenAPI: Think of it as the "what" — the specification that defines how APIs should be described.
-Swagger: Think of it as the "how" — the tools and ecosystem that help you work with OpenAPI.
-If you're starting with API design and documentation today, you'll primarily use OpenAPI as the standard, likely supported by Swagger tools.
+### Authentication Endpoints
+```http
+# Register a new user
+POST /api/auth/register
+Content-Type: application/json
 
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com",
+    "password": "password123"
+}
 
-Service Layer & User Management:
+# Login
+POST /api/auth/login
+Content-Type: application/json
 
-User registration and login
-JWT authentication
-Password encryption
-Basic user CRUD operations
+{
+    "email": "john@example.com",
+    "password": "password123"
+}
+```
 
+### Account Endpoints
+```http
+# Create account
+POST /api/accounts
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
 
-Account Management:
+{
+    "type": "SAVINGS"
+}
 
-Account creation
-Account listing and details
-Account status management
-Balance updates
+# Get user accounts
+GET /api/accounts
+Authorization: Bearer {jwt_token}
+```
 
+### Transaction Endpoints
+```http
+# Deposit
+POST /api/accounts/{accountNumber}/transactions/deposit
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
 
-Transaction Management:
+{
+    "amount": 1000.00,
+    "description": "Initial deposit"
+}
 
-Deposit functionality
-Withdrawal functionality
-Transfer between accounts
-Transaction history
+# Transfer
+POST /api/accounts/{accountNumber}/transactions/transfer
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
 
+{
+    "amount": 100.00,
+    "description": "Transfer to savings",
+    "destinationAccountNumber": "destination_account_number"
+}
+```
 
-Admin Features:
+### Admin Endpoints
+```http
+# Get dashboard statistics
+GET /api/admin/dashboard
+Authorization: Bearer {jwt_token}
 
-Admin dashboard
-User management for admins
-System reports
-Account oversight
+# Get all users
+GET /api/admin/users
+Authorization: Bearer {jwt_token}
+```
 
+## Testing
 
-Testing:
+### Running Tests
+```bash
+# Run all tests
+mvn test
 
-Unit tests
-Integration tests
-Security tests
+# Run specific test class
+mvn test -Dtest=UserServiceTest
 
-SwaggerAPI/OpenAPI
+# Run with coverage report
+mvn clean test
+```
 
+### API Testing with Postman
+1. Import the Postman collection from `postman/Banking_System_API.json`
+2. Set up environment variables:
+   - `baseUrl`: http://localhost:8080
+   - `jwt_token`: Token received from login
 
-Backend test Flow 
+## Security Features
+- Password encryption using BCrypt
+- JWT-based authentication
+- Role-based access control
+- Secure email notifications
+- Input validation
+- Transaction validation
 
-Frontend Development:
+## Error Handling
+- Global exception handling
+- Custom exceptions for business logic
+- Validation error responses
+- Proper HTTP status codes
 
-React components for user interface
-Authentication flows
-Account management interface
-Transaction interface
+## Best Practices
+- DTOs for data transfer
+- Service layer for business logic
+- Repository pattern for data access
+- Unit testing with Mockito
+- Swagger documentation
+- Proper error handling
+- Transaction management
+- Secure password handling
 
-The flow to test would be:
+## Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-Create an account (if you haven't already)
-Make a deposit
-Check your balance
-Make a withdrawal
-View transaction history
-
-
-Make a comprehensive README for this project
-How can other people use this project, like fork this project and test all API themselves
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
