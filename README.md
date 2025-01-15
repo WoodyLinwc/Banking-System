@@ -84,7 +84,7 @@ Unit tests
 Integration tests
 Security tests
 
-
+SwaggerAPI/OpenAPI
 
 
 The flow to test would be:
