@@ -26,13 +26,17 @@ public class TransactionService {
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
 
+    private final EmailService emailService;
+
     @Autowired
     public TransactionService(TransactionRepository transactionRepository, 
                             AccountRepository accountRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            EmailService emailService) {
         this.transactionRepository = transactionRepository;
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -122,6 +126,14 @@ public class TransactionService {
             request.getAmount(),
             TransactionType.TRANSFER,
             request.getDescription()
+        );
+
+        // Send email notifications
+        emailService.sendTransferNotification(
+            sourceAccount.getUser(),
+            destinationAccount.getUser(),
+            transaction,
+            sourceAccount.getBalance()
         );
 
         return convertToDto(transaction, sourceAccount.getBalance());
