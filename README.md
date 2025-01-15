@@ -36,6 +36,9 @@ How JWT(JSON Web Token) works:
 No need to store session state on the server, making the system stateless and scalable.
 Passwords prove who you are (authentication), but JWTs can also handle what you can do (authorization).
 
+OpenAPI: Think of it as the "what" — the specification that defines how APIs should be described.
+Swagger: Think of it as the "how" — the tools and ecosystem that help you work with OpenAPI.
+If you're starting with API design and documentation today, you'll primarily use OpenAPI as the standard, likely supported by Swagger tools.
 
 
 Service Layer & User Management:
@@ -95,3 +98,7 @@ Make a deposit
 Check your balance
 Make a withdrawal
 View transaction history
+
+
+Make a comprehensive README for this project
+How can other people use this project, like fork this project and test all API themselves
