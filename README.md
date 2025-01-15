@@ -83,3 +83,14 @@ Testing:
 Unit tests
 Integration tests
 Security tests
+
+
+
+
+The flow to test would be:
+
+Create an account (if you haven't already)
+Make a deposit
+Check your balance
+Make a withdrawal
+View transaction history
