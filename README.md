@@ -7,28 +7,29 @@ A robust banking system built with Spring Boot that provides secure account mana
 ### Core Dependencies
 - **Spring Boot** (3.2.2)
 A framework for building Java-based applications with embedded servers, simplifying configuration and deployment.
-  - Spring Boot Starter Web: Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
-  - Spring Boot Starter Data JPA: Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
-  - Spring Boot Starter Security: Highly customizable authentication and access-control framework for Spring applications.
-  - Spring Boot Starter Validation: Bean Validation with Hibernate validator
-  - Spring Boot Starter Mail: Send email using Java Mail and Spring Framework's JavaMailSender.
-  - Spring Boot Starter Thymeleaf: A modern server-side Java template engine for both web and standalone environments. Allows HTML to be correctly displayed in browsers and as static prototypes.
+  - **Spring Boot Starter Web**: Build web, including **RESTful**, applications using **Spring MVC**(Model-View-Controller). Uses Apache Tomcat as the default embedded container.
+  - **Spring Boot Starter Parent**: Acts as the parent POM for Spring Boot projects and provides default dependency versions and plugin configurations.
+  - **Spring Boot Starter Data JPA**: Persist data in **SQL** stores with Java Persistence API using Spring Data and **Hibernate**.
+  - **Spring Boot Starter Security**: Highly customizable authentication and access-control framework for Spring applications.
+  - **Spring Boot Starter Validation**: Bean Validation with Hibernate validator
+  - **Spring Boot Starter Mail**: Send email using Java Mail and Spring Framework's JavaMailSender.
+  - **Spring Boot Starter Thymeleaf**: A modern server-side Java template engine for both web and standalone environments. Allows HTML to be correctly displayed in browsers and as static prototypes.
 - **Database**
-  - PostgreSQL
-  - Spring Data JPA
+  - **PostgreSQL**: A powerful, open-source relational database used to store and manage application data.
+  - **Spring Data JPA**: Provides data access abstraction and ORM (Object-Relational Mapping) using JPA with repository-based data handling.
 - **Security**
-  - Spring Security
-  - JWT (JSON Web Token) 0.12.3
+  - **Spring Security**: Handles application security with features like user authentication, authorization, and CSRF protection.
+  - **JWT (JSON Web Token)** 0.12.3: Used for stateless user authentication by encoding claims in a compact, self-contained token.
 - **Documentation**
-  - SpringDoc OpenAPI (Swagger) 2.3.0
+  - SpringDoc OpenAPI (Swagger) 2.3.0: Automatically generates interactive API documentation compliant with the OpenAPI specification.
 - **Testing**
-  - JUnit 5
-  - Mockito
-  - H2 Database (for testing)
+  - JUnit 5: A popular framework for writing and running unit and integration tests.
+  - **Mockito**: A mocking framework for unit tests to simulate dependencies.
+  - **H2 Database** (for testing): An in-memory database used for lightweight and fast testing of database operations.
 - **Other**
-  - Jakarta Validation
-  - Java 17
-  - Maven
+  - **Jakarta** Validation: Provides bean validation support for validating data models against constraints.
+  - **Java 17**: The Long-Term Support (LTS) version of Java, providing enhanced performance and modern language features.
+  - **Maven**: A build automation tool used for managing dependencies, compiling code, running tests, and building the project.
 
 
 ## Annotation
