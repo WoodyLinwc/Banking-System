@@ -6,12 +6,13 @@ A robust banking system built with Spring Boot that provides secure account mana
 
 ### Core Dependencies
 - **Spring Boot** (3.2.2)
-  - Spring Boot Starter Web
-  - Spring Boot Starter Data JPA
-  - Spring Boot Starter Security
-  - Spring Boot Starter Validation
-  - Spring Boot Starter Mail
-  - Spring Boot Starter Thymeleaf
+A framework for building Java-based applications with embedded servers, simplifying configuration and deployment.
+  - Spring Boot Starter Web: Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
+  - Spring Boot Starter Data JPA: Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
+  - Spring Boot Starter Security: Highly customizable authentication and access-control framework for Spring applications.
+  - Spring Boot Starter Validation: Bean Validation with Hibernate validator
+  - Spring Boot Starter Mail: Send email using Java Mail and Spring Framework's JavaMailSender.
+  - Spring Boot Starter Thymeleaf: A modern server-side Java template engine for both web and standalone environments. Allows HTML to be correctly displayed in browsers and as static prototypes.
 - **Database**
   - PostgreSQL
   - Spring Data JPA
@@ -28,6 +29,107 @@ A robust banking system built with Spring Boot that provides secure account mana
   - Jakarta Validation
   - Java 17
   - Maven
+
+
+## Annotation
+### Spring Core
+
+- `@Configuration` - Indicates that a class declares one or more `@Bean` methods.
+- `@Bean` - Indicates that a method produces a bean to be managed by Spring.
+- `@Component` - Generic stereotype for any Spring-managed component.
+- `@Service` - Indicates that a class is a service layer component.
+- `@Repository` - Indicates that a class is a data repository.
+- `@Autowired` - Marks a constructor, field, or setter method for dependency injection.
+- `@Value` - Injects values from properties files.
+
+---
+
+### Spring Web (Spring MVC)
+
+- `@RestController` - Combines `@Controller` and `@ResponseBody`.
+- `@Controller` - Marks the class as a web controller.
+- `@RequestMapping` - Maps web requests to specific handler classes/methods.
+- `@GetMapping` - Shortcut for `@RequestMapping(method = RequestMethod.GET)`.
+- `@PostMapping` - Shortcut for `@RequestMapping(method = RequestMethod.POST)`.
+- `@PutMapping` - Shortcut for `@RequestMapping(method = RequestMethod.PUT)`.
+- `@DeleteMapping` - Shortcut for `@RequestMapping(method = RequestMethod.DELETE)`.
+- `@PathVariable` - Binds a path variable to a method parameter.
+- `@RequestBody` - Binds the HTTP request body to a method parameter.
+- `@RequestParam` - Binds request parameters to a method parameter.
+- `@ResponseEntity` - Represents an HTTP response with body and status.
+
+---
+
+### Spring Security
+
+- `@EnableWebSecurity` - Enables Spring Security's web security support.
+- `@EnableMethodSecurity` - Enables method-level security.
+- `@PreAuthorize` - Specifies the security constraints on a method.
+- `@Secured` - Defines a list of security configuration attributes.
+- `@SecurityConfig` - Configuration class for security settings.
+
+---
+
+### Spring Data JPA
+
+- `@Entity` - Marks a class as a JPA entity.
+- `@Table` - Specifies the table for an entity.
+- `@Id` - Marks a field as the primary key.
+- `@GeneratedValue` - Specifies generation strategy for primary keys.
+- `@Column` - Specifies column mapping.
+- `@ManyToOne` - Defines a many-to-one relationship.
+- `@OneToMany` - Defines a one-to-many relationship.
+- `@JoinColumn` - Specifies a column for joining an entity association.
+- `@Transactional` - Defines transaction boundaries.
+- `@Query` - Defines a custom query.
+
+---
+
+### Spring Boot
+
+- `@SpringBootApplication` - Combines `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`.
+- `@EnableAutoConfiguration` - Enables Spring Boot's auto-configuration.
+
+---
+
+### Spring Validation
+
+- `@Valid` - Marks a property for validation.
+- `@NotNull` - Validates that a value is not null.
+- `@NotBlank` - Validates that a string is not blank.
+- `@Size` - Validates size/length is within bounds.
+- `@Email` - Validates email format.
+
+---
+
+### JPA/Persistence
+
+- `@PrePersist` - Method to be called before an entity is persisted.
+- `@PreUpdate` - Method to be called before an entity is updated.
+- `@ElementCollection` - Specifies a collection of simple values.
+- `@CollectionTable` - Specifies the table for element collections.
+- `@Enumerated` - Specifies how to persist enums.
+
+---
+
+### OpenAPI/Swagger
+
+- `@Tag` - Adds a tag to API documentation.
+- `@Operation` - Describes an API operation.
+- `@ApiResponse` - Documents possible responses.
+- `@Parameter` - Documents an operation parameter.
+
+---
+
+### Test
+
+- `@ExtendWith` - Used to register extensions for testing.
+- `@SpringBootTest` - Bootstraps the full application context for tests.
+- `@Test` - Marks a method as a test case.
+- `@Mock` - Creates a mock object.
+- `@InjectMocks` - Creates an object and injects mocked dependencies.
+- `@BeforeEach` - Method to run before each test.
+
 
 ## Project Structure
 ```
