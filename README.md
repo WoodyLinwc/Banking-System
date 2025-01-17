@@ -247,6 +247,16 @@ Content-Type: application/json
     "password": "password123"
 }
 ```
+You will get a **jwt_token** in the response after you login, which you need to include in the Authorization header for subsequent requests.
+
+#### How JWT works:
+1. A user logs in and provides valid credentials.
+2. The server verifies the credentials, generates a JWT, and sends it to the user.
+3. The client stores the token (e.g., in localStorage or cookies).
+4. The client includes the token in the `Authorization` header of HTTP requests.
+5. The server validates the token and allows or denies access based on its contents.
+
+![jwt](./resource/jwt.png)
 
 ### Account Endpoints
 ```http
@@ -287,6 +297,7 @@ Content-Type: application/json
     "destinationAccountNumber": "destination_account_number"
 }
 ```
+![](./resource/postmantransfer.png)
 
 ### Admin Endpoints
 ```http
@@ -298,6 +309,8 @@ Authorization: Bearer {jwt_token}
 GET /api/admin/users
 Authorization: Bearer {jwt_token}
 ```
+![](./resource/postman.png)
+![](./resource/postman2.png)
 
 ## Testing
 
@@ -314,10 +327,16 @@ mvn clean test
 ```
 
 ### API Testing with Postman
-1. Import the Postman collection from `postman/Banking_System_API.json`
+1. Import the Postman collection from `resource/Banking.postman_collection.json`
 2. Set up environment variables:
    - `baseUrl`: http://localhost:8080
    - `jwt_token`: Token received from login
+
+### Swagger UI and API Documentation
+![](./resource/swaggerui3.png)
+![](./resource/swaggerui2.png)
+![](./resource/swaggerui.png)
+![](./resource/apidoc.png)
 
 ## Security Features
 - Password encryption using BCrypt
