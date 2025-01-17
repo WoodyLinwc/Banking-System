@@ -7,7 +7,7 @@ A robust banking system built with Spring Boot that provides secure account mana
 ### Core Dependencies
 - **Spring Boot** (3.2.2)
 A framework for building Java-based applications with embedded servers, simplifying configuration and deployment.
-  - **Spring Boot Starter Web**: Build web, including **RESTful**, applications using **Spring MVC**(Model-View-Controller). Uses Apache Tomcat as the default embedded container.
+  - **Spring Boot Starter Web**: Build web, including **RESTful**, applications using **Spring MVC** (Model-View-Controller). Uses Apache Tomcat as the default embedded container.
   - **Spring Boot Starter Parent**: Acts as the parent POM for Spring Boot projects and provides default dependency versions and plugin configurations.
   - **Spring Boot Starter Data JPA**: Persist data in **SQL** stores with Java Persistence API using Spring Data and **Hibernate**.
   - **Spring Boot Starter Security**: Highly customizable authentication and access-control framework for Spring applications.
@@ -16,7 +16,7 @@ A framework for building Java-based applications with embedded servers, simplify
   - **Spring Boot Starter Thymeleaf**: A modern server-side Java template engine for both web and standalone environments. Allows HTML to be correctly displayed in browsers and as static prototypes.
 - **Database**
   - **PostgreSQL**: A powerful, open-source relational database used to store and manage application data.
-  - **Spring Data JPA**: Provides data access abstraction and ORM (Object-Relational Mapping) using JPA with repository-based data handling.
+  - **Spring Data JPA**: Provides data access abstraction and *ORM* (Object-Relational Mapping) using JPA with repository-based data handling.
 - **Security**
   - **Spring Security**: Handles application security with features like user authentication, authorization, and CSRF protection.
   - **JWT (JSON Web Token)** 0.12.3: Used for stateless user authentication by encoding claims in a compact, self-contained token.
