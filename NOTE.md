@@ -102,3 +102,9 @@ View transaction history
 
 Make a comprehensive README for this project
 How can other people use this project, like fork this project and test all API themselves
+
+
+Now you can access the Swagger UI at:
+http://localhost:8080/swagger-ui/index.html
+And the OpenAPI JSON at:
+http://localhost:8080/v3/api-docs
